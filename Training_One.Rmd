@@ -1,0 +1,98 @@
+---
+title: "Training one"
+author: "Victor Mandela"
+date: "6/15/2020"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction basics
+
+1. create a github account... future 
+
+2. most of the data is going to be from
+
+https://archive.ics.uci.edu/ml/datasets.php
+
+3. Data cleaning process. 
+
+4. give questions and comments. 
+
+
+## steps in data management
+
+- Access the data -  SQL, dplyr
+
+
+```{r}
+#load the packages
+library(tidyverse)
+library(readxl)
+
+#read in the data in excel
+data <- read_xlsx("AirQualityUCI.xlsx")
+
+#explore
+glimpse(data)
+
+```
+
+#data types
+
+Text data
+
+Integer
+
+Decimals
+
+Binary
+
+categorical data
+
+Dates
+
+library(assertive)
+
+library(janitor)  #cleaning data
+
+### Process of data
+
+1. Access data
+
+2. Explore and process the data
+
+3. Extract insight 
+
+4. report insights
+
+
+```{r}
+clean_data <- janitor::clean_names(data)
+```
+
+
+
+```{r}
+library(skimr)   #used to compute summary for all variables
+
+skimr::skim(clean_data)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
