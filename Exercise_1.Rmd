@@ -1,0 +1,25 @@
+---
+title: "Exercise1"
+author: "Victor Mandela"
+date: "6/15/2020"
+output: html_document
+---
+---
+title: "John_mutiso"
+author: "Victor Mandela"
+date: "6/15/2020"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+Try reading in the data.
+
+Practice on using the glimpse function, janitor package and assertive function.
+
+```{r}
+library(tidyverse)
+
+data <- read_csv("https://raw.githubusercontent.com/johnmutiso/-TidyTuesday/master/2020/week%2023/data/marbles.csv")
+
+```
