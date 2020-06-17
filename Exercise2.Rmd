@@ -1,0 +1,28 @@
+---
+title: "Hotel"
+author: "Victor Mandela"
+date: "6/17/2020"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+
+```{r}
+library(tidyverse)
+
+Hotel <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-11/hotels.csv")
+
+```
+
+## Assignment
+
+Use the `reservation_status_date` column as `date`. Try to conduct the same exercise we did today using this data set and come up with a shiny application dashboard showing the trend of adults, children and babies over time.
+
+The rmarkdown code for last lesson is [here](https://github.com/vmandela99/R-Advanced_June_2020/blob/master/Training2.Rmd)
+
+and the code for shiny app is [here](https://github.com/vmandela99/R-Advanced_June_2020/blob/master/app.R)
+
+and the code for Yaml is [here](https://github.com/vmandela99/R-Advanced_June_2020/blob/master/_site.yml)
+
+Hope to see your feedback at the codingclub email soon. Cheer!
