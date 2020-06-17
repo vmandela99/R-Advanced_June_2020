@@ -1,0 +1,25 @@
+name: Main Dashboard
+sidebar:
+  - text: Dashboards
+    icon: dashboard
+
+  - text: Widgets
+    icon: th
+    menu:
+      - text: Page
+        module: registrations
+      - text: Components
+        module: subscriptions
+
+  - text: Charts
+    icon: bar-chart-o
+    tabs:
+      - text: Average Ticket Price
+        module:
+          metric_panel:
+             metric: !expr DATA$Training2_revenue_avg_ticket_price
+      - text: Percentage Capacity
+        module:
+          metric_panel:
+           metric: !expr DATA$Training2_revenue_pct_capacity
+      - text: About

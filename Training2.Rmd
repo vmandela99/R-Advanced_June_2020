@@ -1,0 +1,110 @@
+---
+title: "Training2_Timeseries_analysis"
+name: metric_Training2_revenue
+owner: vmandela99@gmail.com
+metrics:
+  avg_ticket_price:
+    title: average ticket price
+    description: The amount paid at the entry of threatre
+  pct_capacity:
+    title: Average capacity
+    description: threatre capacity
+dimensions:
+  show:
+    title: Show
+    description: Show title
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(tidyverse)        #we have tool for analysis
+library(dplyr)
+
+
+grosses_data <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-04-28/grosses.csv')
+
+#glimpse for exploring
+glimpse(grosses_data)
+```
+
+```{r}
+library(scale)
+
+grosses_data %>%
+  ggplot(aes(x = week_ending, y = weekly_gross)) +
+  geom_line() +
+  scale_y_continuous(labels = scales::dollar) +
+  expand_limits(y = 0) %>% 
+  labs(x = "Years",
+       y = "Total gross income per theatre")
+
+grosses_data %>%
+  ggplot(aes(x = week_ending, y = avg_ticket_price)) +
+  geom_line() +
+  scale_y_continuous(labels = scales::dollar) +
+  expand_limits(y = 0) %>% 
+  labs(x = "Years",
+       y = "avg ticket price")
+```
+
+Task
+
+see how trends were over time -  time series.
+
+```{r}
+# devtools::install_github("ramnathv/tidymetrics")
+# remotes::install_github("ramnathv/tidymetrics")
+
+library(tidymetrics)
+show_summarized <- grosses_data %>% 
+  filter(show %in% c("Hamilton", "The Lion King",
+                     "Les Miserables", "Rent",
+                     "The Phantom of the Opera", "Wicked",
+                     "Harry Potter and the Cursed Child, Parts One and Two",
+                     "The Book of Mormon")) %>%
+  rename(date = week_ending) %>%
+  cross_by_dimensions(show) %>%
+  cross_by_periods(c("month", "quarter", "year"),
+                   windows = 28) %>%
+  summarize(avg_ticket_price = mean(avg_ticket_price),
+            pct_capacity = mean(pct_capacity)) %>%
+  ungroup()
+
+```
+
+
+```{r}
+use_metrics_scaffold(show_summarized)
+show_metrics <- create_metrics(show_summarized)
+show_metrics
+
+saveRDS(show_metrics, "show_metrics.rds")
+```
+
+
+```{r}
+# devtools::install_github("ramnathv/shinymetrics")
+library(shinymetrics)
+
+preview_metric(show_metrics$Training2_revenue_avg_ticket_price)
+preview_metric(show_metrics$Training2_revenue_pct_capacity)
+```
+
+```{r}
+#remotes::install_github('ramnathv/shinybones')
+
+library(shinybones)
+```
+
+
+
+
+
+
+
+
+
+
+
+
